@@ -1,0 +1,37 @@
+Project
+	id
+	name
+	created_at
+	due_date
+	
+Tasks
+	id
+	name
+	created_at
+	completed
+	due_date
+	project_id
+	priority
+	
+Sub-task
+	id
+	name
+	created_at
+	completed
+	due_date
+	task_id
+	priority
+	
+
+CREATE TABLE shugli.tasks (
+	id INT auto_increment NOT NULL,
+	name varchar(200) NOT NULL,
+	completed BOOL DEFAULT 0 NULL,
+	due_date DATETIME NULL,
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP NULL,
+	priority varchar(10) NULL,
+	CONSTRAINT task_pk PRIMARY KEY (id)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_general_ci;
