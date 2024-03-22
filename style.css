@@ -79,6 +79,10 @@ background:#eee;
 /*    padding-bottom: 15px;*/
 }
 
+.page-todo .task .completed{
+    text-decoration: line-through;
+}
+
 .page-todo .task .desc {
     display: inline-block;
     width: 70%;
@@ -90,6 +94,7 @@ background:#eee;
     font-size: 18px;
     margin-bottom: 5px
 }
+
 
 .page-todo .task .time {
     display: inline-block;
@@ -103,13 +108,13 @@ background:#eee;
 }
 
 .page-todo .task .time .date {
-    font-size: 18px;
+    font-size: 15px;
     margin-bottom: 5px
 }
 
 .page-todo .task .time .remove-task {
-/*    font-size: 18px;*/
-    margin-bottom: 5px;
+    font-size: 10px;
+/*    margin-bottom: 5px;*/
     cursor: pointer;
 }
 

@@ -31,26 +31,45 @@
 				<div class="priority high"><span>high priority</span></div>
 				<?php foreach ($high_priority_tasks as $high_priority_task): ?>
 					<div class="task high">
-						<div class="task-actions">
-							<input type="checkbox" name="completed" class="completed" data-task-id="<?php echo $high_priority_task['id']; ?>">
-						</div>
-						<div class="desc">
-							<div class="title"> <?php echo $high_priority_task['name']; ?> </div>
-							<div>some shit</div>
-						</div>
-						<div class="time">
-							<?php
-							 $created = strtotime($high_priority_task['created_at']);
-							?>
-							<div class="date"> <?php echo date("M d, Y", $created); ?></div>
-							<span id="<?php echo $high_priority_task['id']; ?>" class="remove-task badge" aria-description="remove task">X</span>
-						</div>
+						<?php if($high_priority_task['completed']): ?>
+							<div class="desc">
+								<input type="checkbox" name="completed" class="completed" 
+								data-task-id="<?php echo $high_priority_task['id']; ?>" 
+								checked>
+
+								<div class="title completed"> <?php echo $high_priority_task['name']; ?> </div>
+								<div>some shit</div>
+							</div>
+							<div class="time">
+								<?php
+								 $created = strtotime($high_priority_task['created_at']);
+								?>
+								<div class="date"> <?php echo date("M d, Y", $created); ?></div>
+								<span id="<?php echo $high_priority_task['id']; ?>" class="remove-task badge" aria-description="remove task">X</span>
+							</div>
+						<?php else: ?>
+							<div class="desc">
+								<input type="checkbox" name="completed" class="completed" 
+								data-task-id="<?php echo $high_priority_task['id']; ?>" >
+								
+								<div class="title"> <?php echo $high_priority_task['name']; ?> </div>
+								<div>some shit</div>
+							</div>
+							<div class="time">
+								<?php
+								 $created = strtotime($high_priority_task['created_at']);
+								?>
+								<div class="date"> <?php echo date("M d, Y", $created); ?></div>
+								<span id="<?php echo $high_priority_task['id']; ?>" class="remove-task badge" aria-description="remove task">X</span>
+							</div>
+						<?php endif; ?>
 					</div>
 				<?php endforeach; ?>
 
 				<!-- Medium Priority Tasks  -->
 				<div class="task medium">
 					<div class="desc">
+						<input type="checkbox" name="completed" class="completed" data-task-id="<?php echo $high_priority_task['id']; ?>">
 						<div class="title">Lorem Ipsum</div>
 						<div>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</div>
 					</div>
@@ -65,10 +84,8 @@
 				<div class="priority low"><span>low priority</span></div>
 				<?php foreach ($low_priority_tasks as $low_priority_task): ?>
 					<div class="task low">
-						<div class="task-actions">
-							<input type="checkbox" name="completed" class="completed" data-task-id="<?php echo $high_priority_task['id']; ?>">
-						</div>
 						<div class="desc">
+							<input type="checkbox" name="completed" class="completed" data-task-id="<?php echo $high_priority_task['id']; ?>">
 							<div class="title"> <?php echo $low_priority_task['name']; ?> </div>
 							<div>some shit</div>
 						</div>
@@ -106,7 +123,21 @@
 
 			$('.completed').click(function(){
 				const id = $(this).attr('data-task-id');
-				alert(id);
+				$.post("php/complete.php", 
+					{
+						id: id
+					},
+					(data) => {
+						if(data != "error"){
+							const title = $(this).next();
+							if(data == "1"){
+								title.removeClass('completed');
+							}else {
+								title.addClass('completed');
+							}
+						}
+					}
+				)
 			});
 		});
 	</script>
