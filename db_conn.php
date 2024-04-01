@@ -2,7 +2,7 @@
     $DBDRIVER = "mysql";
     $DBHOST = "localhost";
     $DBUSER = "root";
-    $DBPASS = "";
+    $DBPASS = "cado";
     $DBNAME = "shugli";
 
 

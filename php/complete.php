@@ -1,6 +1,5 @@
 <?php
 	include_once "../db_conn.php";
-
 	if (isset($_POST['id'])) {
 		global $task;
 		global $res;
